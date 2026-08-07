@@ -1,0 +1,17 @@
+{
+  "name": "恋爱记 - 情侣专属日记",
+  "short_name": "恋爱记",
+  "description": "记录恋爱的每一天，每日一问、睡前故事、思念传递",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFF5F7",
+  "theme_color": "#FF6B8A",
+  "icons": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
