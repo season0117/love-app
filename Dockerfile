@@ -16,7 +16,8 @@ COPY . .
 RUN npm run build
 
 # 暴露端口
-EXPOSE 3456
+EXPOSE 8080
+ENV PORT=8080
 
 # 启动
 CMD ["node", "backend/server.js"]
