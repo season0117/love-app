@@ -177,7 +177,7 @@ const server = http.createServer(async (req, res) => {
   })
 })
 
-server.listen(PORT, () => {
-  console.log('Server ready: http://localhost:' + PORT)
+server.listen(PORT, '0.0.0.0', () => {
+  console.log('Server ready on port ' + PORT)
   console.log('API: http://localhost:' + PORT + '/api/state')
 })
