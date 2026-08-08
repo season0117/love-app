@@ -1,4 +1,7 @@
 {
   "name": "api",
-  "main": "index.js"
+  "main": "index.js",
+  "dependencies": {
+    "@cloudbase/node-sdk": "latest"
+  }
 }

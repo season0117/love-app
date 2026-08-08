@@ -1,36 +1,30 @@
-// API 工具 - 统一从服务器获取/保存数据
-const BASE = window.location.origin
+// CloudBase 云函数 API
+const BASE = 'https://love-app-d3gezf6lf27ee3d6e.service.tcloudbase.com/api'
 
-async function apiGet(path) {
-  const res = await fetch(BASE + path)
-  return res.json()
-}
-
-async function apiPost(path, data) {
-  const res = await fetch(BASE + path, {
+async function call(action, data = {}) {
+  const res = await fetch(BASE, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: JSON.stringify({ action, data })
   })
   return res.json()
 }
 
-export function getState() { return apiGet('/api/state') }
+export function getState() { return call('getState') }
 
-// 恋爱日期
-export function saveLoveDate(date) { return apiPost('/api/love-date', { date }) }
+export function saveLoveDate(date) { return call('saveLoveDate', { date }) }
 
-// 纪念日
-export function saveAnniversary(name, date) { return apiPost('/api/anniversary', { name, date }) }
+export function saveAnniversary(name, date) { return call('saveAnniversary', { name, date }) }
 
-// 每日问答
-export function saveDailyAnswer(dateKey, answer) { return apiPost('/api/daily-answer', { dateKey, answer }) }
+export function saveDailyAnswer(dateKey, answer) { return call('saveDailyAnswer', { dateKey, answer }) }
 
-// 想你了
-export function sendMiss(text, emoji) { return apiPost('/api/miss-send', { text, emoji }) }
-export function getMissMessages() { return apiGet('/api/miss-messages') }
+export function sendMiss(text, emoji) {
+  const now = new Date()
+  return call('sendMiss', { text, emoji, time: (now.getMonth()+1)+'月'+now.getDate()+'日 '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0') })
+}
 
-// 睡前故事
-export function getStoryHistory() { return apiGet('/api/story-history') }
-export function addStoryToHistory(story) { return apiPost('/api/story-add', story) }
-export function toggleStoryLike(dateKey, liked) { return apiPost('/api/story-like', { dateKey, liked }) }
+export function getMissMessages() { return call('getMissMessages') }
+
+export function getStoryHistory() { return call('getStoryHistory') }
+export function addStoryToHistory(story) { return call('addStory', story) }
+export function toggleStoryLike(dateKey, liked) { return call('toggleStoryLike', { dateKey, liked }) }
