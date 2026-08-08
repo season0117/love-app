@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const url = require('url')
 
-const PORT = 3456
+const PORT = process.env.PORT || 3456
 const DATA_DIR = path.join(__dirname, 'data')
 const DB = path.join(DATA_DIR, 'state.json')
 
